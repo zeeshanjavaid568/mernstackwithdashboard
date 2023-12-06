@@ -26,7 +26,11 @@ const register = async (req, res) => {
       phone,
       password,
     });
-    res.status(201).json(userCreated);
+    res.status(201).json({
+      msg: "registration successful",
+      token: await userCreated.generateToken(),
+      userId: userCreated._id.toString(),
+    });
   } catch (error) {
     res.status(400).send({ message: "Page not found." });
   }

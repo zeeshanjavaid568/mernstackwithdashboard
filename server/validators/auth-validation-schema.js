@@ -23,4 +23,18 @@ const registerSchema = z.object({
     .max(255, { message: "password must not be more than 255 charactors" }),
 });
 
-module.exports = registerSchema;
+const loginSchema = z.object({
+  email: z
+    .string({ required_error: "email is required." })
+    .trim()
+    .email({ message: "Invalid email address" })
+    .min(3, { message: "email must be at least of 3 charactor" })
+    .max(255, { message: "email must not be more than 255 charactors" }),
+
+  password: z
+    .string({ required_error: "password is required." })
+    .min(8, { message: "password must be at least of 8 charactor" })
+    .max(255, { message: "password must not be more than 255 charactors" }),
+});
+
+module.exports = { registerSchema, loginSchema };

@@ -1,4 +1,5 @@
 const User = require("../model/user-model");
+const bcrypt = require("bcryptjs");
 
 //========HOME-PAGE-FUNCTION===========
 
@@ -32,8 +33,34 @@ const register = async (req, res) => {
       userId: userCreated._id.toString(),
     });
   } catch (error) {
-    res.status(400).send({ message: "Page not found." });
+    res.status(500).send("internal server error");
   }
 };
 
-module.exports = { home, register };
+//========LOGIN-PAGE-FUNCTION===========
+
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const userExist = await User.findOne({ email });
+    if (!userExist) {
+      return res.status(400).send({ message: "Invalid Credentails" });
+    }
+
+    const user = await bcrypt.compare(password, userExist.password);
+
+    if (user) {
+      res.status(200).json({
+        msg: "login successful",
+        token: await userExist.generateToken(),
+        userId: userExist._id.toString(),
+      });
+    } else {
+      res.status(401).send({ message: "Invalid email or password" });
+    }
+  } catch (error) {
+    res.status(500).send("internal server error");
+  }
+};
+
+module.exports = { home, register, login };

@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-//password-hashing-method
+//PASSWORD-HASHING-METHOD
 userSchema.pre("save", async function (next) {
   const user = this;
 
@@ -41,6 +41,12 @@ userSchema.pre("save", async function (next) {
     next(error);
   }
 });
+
+//COMPARE-PASSWORD-IN-LOGIN-INSTANCE
+userSchema.methods.comparePassword = async function (password) {
+  console.log(this);
+  return bcrypt.compare(password, this.password);
+};
 
 //JSON-WEB-TOKEN-INSTANCE-CREATED => Used for authentication and authrization
 userSchema.methods.generateToken = async function () {

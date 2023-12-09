@@ -2,14 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const PORT = 5000;
-const router = require("./router/auth-router");
+const authRoute = require("./router/auth-router");
+const contactFormRoute = require('./router/contact-form-router');
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 
 //this method used for get data from put method data from api
 app.use(express.json());
 //router-middleware
-app.use("/api/auth", router);
+app.use("/api/auth", authRoute);
+app.use("/api/form", contactFormRoute);
 //we must create error middleware above the server connection
 app.use(errorMiddleware);
 

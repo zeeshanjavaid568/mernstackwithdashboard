@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const PORT = 5000;
 const authRoute = require("./router/auth-router");
-const contactFormRoute = require('./router/contact-form-router');
+const contactFormRoute = require("./router/contact-form-router");
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 

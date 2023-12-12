@@ -10,3 +10,8 @@ ul {
     display: flex;
     gap: 3.2rem;
 }
+
+ul li {
+    list-style: none;
+    text-decoration: none;
+}

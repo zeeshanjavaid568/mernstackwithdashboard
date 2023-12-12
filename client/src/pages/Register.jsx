@@ -2,26 +2,27 @@ import { useState } from "react";
 
 const Register = () => {
   const [user, setUser] = useState({
-    username: '',
-    email: '',
-    phone: '',
-    password: '',
+    username: "",
+    email: "",
+    phone: "",
+    password: "",
   });
 
-  const handleInput = (e) =>{
+  const handleInput = (e) => {
     console.log(e);
     let name = e.target.name;
     let value = e.target.value;
     setUser({
       ...user,
       [name]: value,
-    })
+    });
   };
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     alert(user);
-  }
+  };
+
   return (
     <>
       <main>
@@ -94,7 +95,10 @@ const Register = () => {
                 </div>
                 <br />
 
-                <button type="submit" className="btn btn-submit"> Register Now </button>
+                <button type="submit" className="btn btn-submit">
+                  {" "}
+                  Register Now{" "}
+                </button>
               </form>
             </div>
           </div>

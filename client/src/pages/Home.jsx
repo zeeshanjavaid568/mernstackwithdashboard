@@ -1,7 +1,7 @@
 const Home = () => {
   return (
     <>
-       <main>
+      <main>
         <section className="section-hero">
           <div className="container grid grid-two-cols">
             <div className="hero-content">
@@ -36,8 +36,8 @@ const Home = () => {
         </section>
       </main>
 
-        {/* 3rd section  */}
-        <section className="section-hero">
+      {/* 3rd section  */}
+      <section className="section-hero">
         <div className="container grid grid-two-cols">
           {/* hero images  */}
           <div className="hero-image">
@@ -69,7 +69,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
     </>
   );
 };

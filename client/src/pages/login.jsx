@@ -1,11 +1,10 @@
 import { useState } from "react";
 
- const Login = () => {
+const Login = () => {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
-
 
   // let handle the input field value
   const handleInput = (e) => {
@@ -18,10 +17,10 @@ import { useState } from "react";
     });
   };
 
-  const handleSubmit = (e) =>{
-  e.preventDefault();
-  console.log(user);
- };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(user);
+  };
 
   return (
     <>

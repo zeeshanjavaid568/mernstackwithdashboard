@@ -8,6 +8,7 @@ import Login from "./pages/login";
 import Serivces from "./pages/Serivces";
 import Navbar from "./components/common/Navbar";
 import Error from "./pages/Error";
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </>
   );
 }

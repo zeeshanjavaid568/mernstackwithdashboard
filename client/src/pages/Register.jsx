@@ -27,7 +27,7 @@ const Register = () => {
     <>
       <main>
         <div className="section-registration">
-          <div className="container grid grid-tow-cols">
+          <div className="container grid grid-two-cols">
             <div className="resgtistration-image">
               <img
                 src="/image/registeration-image.jpg"

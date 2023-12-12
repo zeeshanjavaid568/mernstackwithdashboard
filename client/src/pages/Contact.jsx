@@ -31,7 +31,10 @@ const Contact = () => {
         {/* contact page main  */}
         <div className="container grid grid-two-cols">
           <div className="contact-img">
-            <img src="/image/registeration-image.jpg" alt="we are always ready to help" />
+            <img
+              src="/image/registeration-image.jpg"
+              alt="we are always ready to help"
+            />
           </div>
 
           {/* contact form content actual  */}

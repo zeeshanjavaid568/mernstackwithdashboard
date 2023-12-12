@@ -26,9 +26,9 @@ const Home = () => {
             {/* hero images  */}
             <div className="hero-image">
               <img
-                src="/image/registeration-image.jpg"
+                src="/image/contact-page.png"
                 alt="coding together"
-                width="400"
+                width="500"
                 height="500"
               />
             </div>
@@ -42,10 +42,10 @@ const Home = () => {
           {/* hero images  */}
           <div className="hero-image">
             <img
-              src="/image/registeration-image.jpg"
+              src="/image/home-page-2.jpg"
               alt="coding together"
-              width="400"
-              height="500"
+              width="500"
+              height="600"
             />
           </div>
 

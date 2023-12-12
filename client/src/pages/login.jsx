@@ -30,7 +30,7 @@ const Login = () => {
             <div className="container grid grid-two-cols">
               <div className="registration-image reg-img">
                 <img
-                  src="/image/registeration-image.jpg"
+                  src="/image/register-and-login-page.png"
                   alt="a nurse with a cute look"
                   width="400"
                   height="500"

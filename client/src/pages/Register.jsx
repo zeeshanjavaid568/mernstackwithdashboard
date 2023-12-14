@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const { useAuth } = "../store/auth.jsx";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -10,6 +11,7 @@ const Register = () => {
   });
 
   const navigate = useNavigate();
+  const { storetokenInLS } = useAuth();
 
   const handleInput = (e) => {
     console.log(e);
@@ -32,6 +34,10 @@ const Register = () => {
       });
 
       if (response.ok) {
+        const res_data = await response.json();
+        console.log("res_data response", res_data);
+        //TODO: stored the token in local storage
+        storetokenInLS(res_data.token);
         //! setUser method used for empty useState form data
         setUser({ username: "", email: "", phone: "", password: "" });
         navigate("/login");

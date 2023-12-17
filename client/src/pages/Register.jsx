@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const { useAuth } = "../store/auth.jsx";
+import { useAuth } from "../store/auth";
 
 const Register = () => {
   const [user, setUser] = useState({

@@ -5,6 +5,7 @@ const PORT = 5000;
 const cors = require("cors");
 const authRoute = require("./router/auth-router");
 const contactFormRoute = require("./router/contact-form-router");
+const serviceRoute = require('./router/services-router');
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 
@@ -19,6 +20,7 @@ app.use(express.json());
 //router-middleware
 app.use("/api/auth", authRoute);
 app.use("/api/form", contactFormRoute);
+app.use("/api/data", serviceRoute);
 //we must create error middleware above the server connection
 app.use(errorMiddleware);
 

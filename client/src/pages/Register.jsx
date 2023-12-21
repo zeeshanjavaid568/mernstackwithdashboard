@@ -42,7 +42,7 @@ const Register = () => {
         storetokenInLS(res_data.token);
         //! setUser method used for empty useState form data
         setUser({ username: "", email: "", phone: "", password: "" });
-        navigate("/login");
+        navigate("/");
       } else {
         toast.error(
           res_data.extraDetails ? res_data.extraDetails : res_data.message

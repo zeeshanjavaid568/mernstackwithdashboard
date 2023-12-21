@@ -33,16 +33,17 @@ const Register = () => {
         body: JSON.stringify(user),
       });
 
+      const res_data = await response.json();
+      console.log("res_data response", res_data);
       if (response.ok) {
-        const res_data = await response.json();
-        console.log("res_data response", res_data);
         //TODO: stored the token in local storage
         storetokenInLS(res_data.token);
         //! setUser method used for empty useState form data
         setUser({ username: "", email: "", phone: "", password: "" });
         navigate("/login");
+      } else {
+        alert(res_data.extraDetails ? res_data.extraDetails : res_data.message);
       }
-      console.log(response);
     } catch (error) {
       console.log("Register error", error);
     }

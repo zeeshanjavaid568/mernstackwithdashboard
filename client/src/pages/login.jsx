@@ -33,9 +33,9 @@ const Login = () => {
         body: JSON.stringify(user),
       });
 
+      const res_data = await response.json();
+      console.log("res_data response", res_data);
       if (response.ok) {
-        const res_data = await response.json();
-        console.log("res_data response", res_data);
         alert("Login successfull");
         //TODO: stored the token in local storage
         storetokenInLS(res_data.token);
@@ -45,7 +45,7 @@ const Login = () => {
         });
         navigate("/");
       } else {
-        alert("invalid credentials");
+        alert(res_data.extraDetails ? res_data.extraDetails : res_data.message);
       }
       console.log(response);
     } catch (error) {

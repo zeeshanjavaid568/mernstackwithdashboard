@@ -13,7 +13,6 @@ const Serivces = () => {
         <div className="container grid grid-three-cols">
           {services.map((curElem, index) => {
             const { provider, price, service, description } = curElem;
-            console.log(curElem);
             return (
               <div className="card" key={index}>
                 <div className="card-img">

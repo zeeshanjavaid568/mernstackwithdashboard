@@ -142,6 +142,13 @@ a.active {
     }
 }
 
+/* TODO: Default toastify styling */
+
+.toastBody {
+  font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
+  font-size: 1.7rem;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         color: #213547;

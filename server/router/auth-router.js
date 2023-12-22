@@ -8,7 +8,6 @@ const {
 } = require("../validators/auth-validation-schema");
 const authMiddleware = require("../middlewares/auth-middleware");
 
-router.route("/").get(authController.home);
 router
   .route("/register")
   .post(validate(registerSchema), authController.register);

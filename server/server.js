@@ -8,6 +8,7 @@ const contactFormRoute = require("./router/contact-form-router");
 const serviceRoute = require("./router/services-router");
 const usersAdminRoute = require("./router/admin-users-router");
 const contactsAdminRoute = require("./router/admin-contacts-router");
+const servicesAdminRoute = require("./router/admin-services-router");
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 
@@ -26,6 +27,7 @@ app.use("/api/data", serviceRoute);
 //TODO: Admin Panel Routes
 app.use("/api/admin", usersAdminRoute);
 app.use("/api/admin", contactsAdminRoute);
+app.use("/api/admin", servicesAdminRoute);
 //we must create error middleware above the server connection
 app.use(errorMiddleware);
 

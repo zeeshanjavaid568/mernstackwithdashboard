@@ -5,10 +5,9 @@ const services = async (req, res) => {
     const response = await Service.find();
 
     if (!response) {
-      res.status(404).json({ msg: "No service found" });
-      return;
+      return res.status(404).json({ message: "No service found" });
     }
-    res.status(200).json({ msg: response });
+    res.status(200).json({ message: response });
   } catch (error) {
     console.log(`Services Page Error ${error}`);
   }

@@ -17,7 +17,7 @@ const register = async (req, res) => {
       password,
     });
     res.status(201).json({
-      msg: "registration successful",
+      message: "registration successful",
       token: await userCreated.generateToken(),
       userId: userCreated._id.toString(),
     });
@@ -40,7 +40,7 @@ const login = async (req, res) => {
 
     if (user) {
       res.status(200).json({
-        msg: "login successful",
+        message: "login successful",
         token: await userExist.generateToken(),
         userId: userExist._id.toString(),
       });

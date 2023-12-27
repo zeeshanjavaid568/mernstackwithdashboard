@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const [user, setUser] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -25,7 +25,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
+    // console.log(user);
 
     try {
       const response = await fetch(`http://localhost:5000/api/auth/login`, {
@@ -35,13 +35,13 @@ const Login = () => {
       });
 
       const res_data = await response.json();
-      console.log("res_data response", res_data);
+      console.log("🚀 ~ file: login.jsx:38 ~ handleSubmit ~ res_data login:", res_data)
       if (response.ok) {
-        toast.success("Registration Successful");
+        toast.success("Login Successful");
         //TODO: stored the token in local storage
         storetokenInLS(res_data.token);
         setUser({
-          username: "",
+          email: "",
           password: "",
         });
         navigate("/");
@@ -50,7 +50,7 @@ const Login = () => {
           res_data.extraDetails ? res_data.extraDetails : res_data.message
         );
       }
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log("Login form error", error);
     }

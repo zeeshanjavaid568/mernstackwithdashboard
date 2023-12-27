@@ -15,7 +15,6 @@ const Register = () => {
   const { storetokenInLS } = useAuth();
 
   const handleInput = (e) => {
-    console.log(e);
     let name = e.target.name;
     let value = e.target.value;
     setUser({
@@ -23,10 +22,10 @@ const Register = () => {
       [name]: value,
     });
   };
+    console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
     try {
       const response = await fetch(`http://localhost:5000/api/auth/register`, {
         method: "POST",

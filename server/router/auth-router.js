@@ -6,7 +6,7 @@ const {
   registerSchema,
   loginSchema,
 } = require("../validators/auth-validation-schema");
-const authMiddleware = require("../middlewares/auth-middleware");
+const authMiddleware  = require('../middlewares/auth-middleware');
 
 router
   .route("/register")

@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-//PASSWORD-HASHING-METHOD
+//TODO: PASSWORD-HASHING-METHOD
 userSchema.pre("save", async function (next) {
   const user = this;
 
@@ -42,13 +42,13 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-//COMPARE-PASSWORD-IN-LOGIN-INSTANCE
+//TODO: COMPARE-PASSWORD-IN-LOGIN-INSTANCE
 userSchema.methods.comparePassword = async function (password) {
   console.log(this);
   return bcrypt.compare(password, this.password);
 };
 
-//JSON-WEB-TOKEN-INSTANCE-CREATED => Used for authentication and authrization
+//TODO: JSON-WEB-TOKEN-INSTANCE-CREATED => Used for authentication and authrization
 userSchema.methods.generateToken = async function () {
   try {
     return jwt.sign(
@@ -57,7 +57,7 @@ userSchema.methods.generateToken = async function () {
         email: this.email,
         isAdmin: this.isAdmin,
       },
-      process.env.JWT_SECRET_key,
+      process.env.JWT_SECRET_KEY,
       {
         expiresIn: "30d",
       }

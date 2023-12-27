@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        console.log("🚀 ~ file: auth.jsx:39 ~ userAuthentication ~ data:", data)
         setUser(data.userData);
       }
     } catch (error) {
@@ -53,8 +53,8 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data.msg);
-        setServices(data.msg);
+        // console.log("🚀 ~ file: auth.jsx:56 ~ getServices ~ data:", data)
+        setServices(data.message);
       }
     } catch (error) {
       console.log(`Frontend services page error: ${error}`);

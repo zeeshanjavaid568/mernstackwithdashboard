@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-// import { useAuth } from "../store/auth";
+import { useAuth } from "../store/auth";
 
 const Admin_Users = () => {
   const [users, setUsers] = useState();
   // console.log("🚀 ~ file: Admin_Users.jsx:6 ~ users:", users);
-  // const { authrizationToken } = useAuth();
+  const { authorizationToken } = useAuth();
 
   const getAllUsersData = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/admin/users", {
         method: "GET",
+        headers: { Authorization: authorizationToken },
       });
       const data = await response.json();
       // console.log(
@@ -21,9 +22,11 @@ const Admin_Users = () => {
       console.log(`Admin Users Error: ${error}`);
     }
   };
+
   useEffect(() => {
     getAllUsersData();
   }, []);
+
   return (
     <>
       <section>
@@ -32,13 +35,13 @@ const Admin_Users = () => {
         </div>
         <div className="container admin-users">
           <table>
-            <th>
+            <tr>
               <th> Name </th>
               <th> Email </th>
               <th> Phone </th>
               <th> Update </th>
               <th> Delete </th>
-            </th>
+            </tr>
             <tbody>
               {users?.map((usersData, index) => {
                 return (

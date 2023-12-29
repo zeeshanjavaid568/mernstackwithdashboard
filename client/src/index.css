@@ -465,6 +465,19 @@ a.active {
     }
 }
 
+body tr{
+    display: grid;
+    grid-template-columns: repeat(5, minmax(10rem, 1fr));
+    align-items: 0 0.3rem 0 grey;
+    margin-bottom: 10px;
+    border-bottom: 4px solid transparent;
+    color: var(--bg-color);
+    &:last-child{
+        box-shadow: none;
+    }
+}
+
+
 /** -----------------------
   ** media query section css
   ** -------------------------  */

@@ -1,10 +1,17 @@
 const express = require("express");
 const adminController = require("../controllers/admin-controller");
-const authMiddleware = require("../middlewares/auth-middleware");
 const router = express.Router();
+const authMiddleware = require("../middlewares/auth-middleware");
+const adminMiddleware = require("../middlewares/admin-middleware");
 
-router.route("/users").get( adminController.getAllUsers);
-router.route("/contacts").get(adminController.getAllContacts);
-router.route("/services").get(adminController.getAllServices);
+router
+  .route("/users")
+  .get(authMiddleware, adminMiddleware, adminController.getAllUsers);
+router
+  .route("/contacts")
+  .get(authMiddleware, adminMiddleware, adminController.getAllContacts);
+router
+  .route("/services")
+  .get(authMiddleware, adminMiddleware, adminController.getAllServices);
 
 module.exports = router;

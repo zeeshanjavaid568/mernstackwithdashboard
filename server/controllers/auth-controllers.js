@@ -57,11 +57,16 @@ const login = async (req, res) => {
 const user = async (req, res, next) => {
   try {
     const userData = req.user;
-    console.log("🚀 ~ file: auth-controllers.js:60 ~ user ~ userData:", userData)
-    return res.status(200).json({userData});
+    // console.log(
+    //   "🚀 ~ file: auth-controllers.js:60 ~ user ~ userData:",
+    //   userData
+    // );
+    return res.status(200).json({ userData: userData });
   } catch (error) {
     // next()
-    res.status(500).json(console.log("current user Data function error", error));
+    res
+      .status(500)
+      .json(console.log("current user Data function error", error));
   }
 };
 

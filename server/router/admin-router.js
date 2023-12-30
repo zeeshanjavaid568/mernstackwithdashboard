@@ -6,7 +6,8 @@ const adminMiddleware = require("../middlewares/admin-middleware");
 
 router
   .route("/users")
-  .get(authMiddleware, adminMiddleware, adminController.getAllUsers);
+  .get(authMiddleware, adminController.getAllUsers);
+router.route('/users/delete/:id').delete(authMiddleware, adminMiddleware, adminController.deleteUser);  
 router
   .route("/contacts")
   .get(authMiddleware, adminMiddleware, adminController.getAllContacts);

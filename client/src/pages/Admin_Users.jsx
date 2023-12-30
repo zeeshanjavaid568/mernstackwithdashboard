@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Admin_Users = () => {
   const [users, setUsers] = useState();
   // console.log("🚀 ~ file: Admin_Users.jsx:6 ~ users:", users);
   const { authorizationToken } = useAuth();
 
+  //TODO: ALL USERS GET API USED
   const getAllUsersData = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/admin/users", {
@@ -24,23 +26,30 @@ const Admin_Users = () => {
     }
   };
 
-  const deleteUser = async (id) =>{
+  //TODO: DELETE USER API USED
+  const deleteUser = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/users/delete/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: authorizationToken },
-      });
+      const response = await fetch(
+        `http://localhost:5000/api/admin/users/delete/${id}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: authorizationToken },
+        }
+      );
       const userDeleteData = await response.json();
-      console.log("🚀 ~ file: Admin_Users.jsx:37 ~ deleteUser ~ userDeleteData:", userDeleteData)
+      console.log(
+        "🚀 ~ file: Admin_Users.jsx:37 ~ deleteUser ~ userDeleteData:",
+        userDeleteData
+      );
       toast.success(userDeleteData.message);
 
-     if (response.ok) {
-      getAllUsersData();
-     }
+      if (response.ok) {
+        getAllUsersData();
+      }
     } catch (error) {
       console.log(`Admin delete User Error: ${error}`);
     }
-  }
+  };
 
   useEffect(() => {
     getAllUsersData();
@@ -68,8 +77,19 @@ const Admin_Users = () => {
                     <td> {usersData.username} </td>
                     <td> {usersData.email} </td>
                     <td> {usersData.phone} </td>
-                    <td> Edite </td>
-                    <td> <button onClick={()=> deleteUser(usersData._id)}> Delete </button> </td>
+                    <td>
+                      <Link to={`/admin/users/${usersData._id}/edit`}>
+                        {" "}
+                        Edit{" "}
+                      </Link>
+                    </td>
+                    <td>
+                      {" "}
+                      <button onClick={() => deleteUser(usersData._id)}>
+                        {" "}
+                        Delete{" "}
+                      </button>{" "}
+                    </td>
                   </tr>
                 );
               })}

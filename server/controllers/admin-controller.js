@@ -17,16 +17,28 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
+//!===========GET-SINGLE-UserDATA-FOR-UPDATE-Fuction=============
+
+const getUserById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const data = await User.findOne({ _id: id }, { password: 0 });
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
 //!===========delete-User-Fuction=============
 
-const deleteUser = async (req, res, next) =>{
-try {
-  const id = req.params.id;
-  await User.deleteOne({_id: id});
-  res.status(200).json({message: 'User deleted Successfully'})
-} catch (error) {
-  next(error);
-}
+const deleteUser = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await User.deleteOne({ _id: id });
+    res.status(200).json({ message: "User deleted Successfully" });
+  } catch (error) {
+    next(error);
+  }
 };
 
 //!===========Contact-Fuction=============
@@ -58,4 +70,10 @@ const getAllServices = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllUsers, deleteUser, getAllContacts, getAllServices };
+module.exports = {
+  getAllUsers,
+  deleteUser,
+  getUserById,
+  getAllContacts,
+  getAllServices,
+};

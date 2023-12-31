@@ -14,6 +14,7 @@ import AdminLayout from "./components/layouts/AdminLayout";
 import Admin_Users from "./pages/Admin_Users";
 import Admin_Contacts from "./pages/Admin_Contacts";
 import Admin_Services from "./pages/Admin_Services";
+import Admin_Update from "./pages/Admin_Update";
 
 function App() {
   return (
@@ -31,8 +32,10 @@ function App() {
         {/* //TODO: Admin Panel Nested Routes */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="users" element={<Admin_Users />} />
+          <Route path="users/:id/edit" element={<Admin_Update />} />
           <Route path="contacts" element={<Admin_Contacts />} />
           <Route path="services" element={<Admin_Services />} />
+
         </Route>
       </Routes>
       <Footer />

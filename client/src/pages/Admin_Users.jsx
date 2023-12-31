@@ -78,17 +78,16 @@ const Admin_Users = () => {
                     <td> {usersData.email} </td>
                     <td> {usersData.phone} </td>
                     <td>
+                      <button>
                       <Link to={`/admin/users/${usersData._id}/edit`}>
-                        {" "}
-                        Edit{" "}
+                        Edit
                       </Link>
+                      </button>
                     </td>
                     <td>
-                      {" "}
                       <button onClick={() => deleteUser(usersData._id)}>
-                        {" "}
-                        Delete{" "}
-                      </button>{" "}
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );

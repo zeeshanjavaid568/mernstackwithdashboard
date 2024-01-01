@@ -17,13 +17,31 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-//!===========GET-SINGLE-UserDATA-FOR-UPDATE-Fuction=============
+//!===========GET-SINGLE-UserDATA-IN-UPDATE-Fuction=============
 
 const getUserById = async (req, res, next) => {
   try {
     const id = req.params.id;
     const data = await User.findOne({ _id: id }, { password: 0 });
     res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//!===========UPDATE-SINGLE-UserDATA-IN-UPDATE-Fuction=============
+
+const updateUserDataById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const updatedUserData = req.body;
+
+    const updatedData = await User.updateOne(
+      { _id: id },
+      { $set: updatedUserData }
+    );
+    const message = 'User data update successfully.';
+    return res.status(200).json({ message, updatedData});
   } catch (error) {
     next(error);
   }
@@ -76,4 +94,5 @@ module.exports = {
   getUserById,
   getAllContacts,
   getAllServices,
+  updateUserDataById,
 };

@@ -12,7 +12,7 @@ const Admin_Update = () => {
   const params = useParams();
   const { authorizationToken } = useAuth();
 
-  //TODO: SINGLE USER GET API USED
+  //TODO: SINGLE USER GET DATA FOR UPDATE API USED
   const getSingleUserData = async () => {
     try {
       const response = await fetch(

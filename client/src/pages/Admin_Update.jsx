@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
 
 const Admin_Update = () => {
   const [data, setData] = useState({
@@ -11,6 +12,44 @@ const Admin_Update = () => {
 
   const params = useParams();
   const { authorizationToken } = useAuth();
+
+  const handleInputs = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  //TODO: UPDATE USER WITH API USED PATCH METHOD
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/admin/users/update/${params.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authorizationToken,
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      // const updateUserData = await response.json();
+      // console.log("🚀 ~ file: Admin_Update.jsx:40 ~ handleSubmit ~ updateUserData:", updateUserData)
+
+      if (response.ok) {
+        toast.success("Updated successfully.");
+      } else {
+        toast.error("Not Updated successfully.");
+      }
+    } catch (error) {
+      console.log(`Admin delete User Error: ${error}`);
+    }
+  };
 
   //TODO: SINGLE USER GET DATA FOR UPDATE API USED
   const getSingleUserData = async () => {
@@ -23,25 +62,12 @@ const Admin_Update = () => {
         }
       );
       const data = await response.json();
-      console.log(
-        "🚀 ~ file: Admin_Update.jsx:36 ~ getSingleUserData ~ data:",
-        data
-      );
+
       setData(data);
     } catch (error) {
       console.log(`Admin delete User Error: ${error}`);
     }
   };
-
-//   const handleInput = (e) => {
-//     let name = e.target.value;
-//     let value = e.target.value;
-
-//     setData({
-//       ...data,
-//       [name]: value,
-//     });
-//   };
 
   useEffect(() => {
     getSingleUserData();
@@ -57,7 +83,7 @@ const Admin_Update = () => {
         <div className="container grid grid-two-cols">
           {/* contact form content actual  */}
           <section className="section-form">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="username">username</label>
                 <input
@@ -65,8 +91,8 @@ const Admin_Update = () => {
                   name="username"
                   id="username"
                   autoComplete="off"
+                  onChange={handleInputs}
                   value={data.username}
-                //   onChange={handleInput}
                   required
                 />
               </div>
@@ -78,8 +104,8 @@ const Admin_Update = () => {
                   name="email"
                   id="email"
                   autoComplete="off"
+                  onChange={handleInputs}
                   value={data.email}
-                //   onChange={handleInput}
                   required
                 />
               </div>
@@ -91,8 +117,8 @@ const Admin_Update = () => {
                   name="phone"
                   id="phone"
                   autoComplete="off"
+                  onChange={handleInputs}
                   value={data.phone}
-                //   onChange={handleInput}
                   required
                 />
               </div>

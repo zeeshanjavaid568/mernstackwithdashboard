@@ -77,7 +77,6 @@ const Register = () => {
                     name="username"
                     placeholder="username"
                     id="user"
-                    required
                     autoComplete="off"
                     value={user.username}
                     onChange={handleInput}
@@ -90,7 +89,6 @@ const Register = () => {
                     name="email"
                     placeholder="email"
                     id="email"
-                    required
                     autoComplete="off"
                     value={user.email}
                     onChange={handleInput}
@@ -103,7 +101,6 @@ const Register = () => {
                     name="phone"
                     placeholder="phone"
                     id="phone"
-                    required
                     autoComplete="off"
                     value={user.phone}
                     onChange={handleInput}
@@ -116,7 +113,6 @@ const Register = () => {
                     name="password"
                     placeholder="password"
                     id="password"
-                    required
                     autoComplete="off"
                     value={user.password}
                     onChange={handleInput}
@@ -125,8 +121,7 @@ const Register = () => {
                 <br />
 
                 <button type="submit" className="btn btn-submit">
-                  {" "}
-                  Register Now{" "}
+                  Register Now
                 </button>
               </form>
             </div>

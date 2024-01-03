@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { storetokenInLS } = useAuth();
 
-  // let handle the input field value
+  //TODO: let handle the input field values
   const handleInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -25,7 +25,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(user);
 
     try {
       const response = await fetch(`http://localhost:5000/api/auth/login`, {
@@ -35,7 +34,6 @@ const Login = () => {
       });
 
       const res_data = await response.json();
-      console.log("🚀 ~ file: login.jsx:38 ~ handleSubmit ~ res_data login:", res_data)
       if (response.ok) {
         toast.success("Login Successful");
         //TODO: stored the token in local storage
@@ -50,7 +48,6 @@ const Login = () => {
           res_data.extraDetails ? res_data.extraDetails : res_data.message
         );
       }
-      // console.log(response);
     } catch (error) {
       console.log("Login form error", error);
     }
@@ -70,7 +67,7 @@ const Login = () => {
                   height="500"
                 />
               </div>
-              {/* our main registration code  */}
+              {/*//TODO: our main registration code  */}
               <div className="registration-form">
                 <h1 className="main-heading mb-3">Login form</h1>
                 <br />

@@ -59,7 +59,7 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-//!===========Contact-Fuction=============
+//!===========Contacts-Fuction=============
 
 const getAllContacts = async (req, res, next) => {
   try {
@@ -73,7 +73,7 @@ const getAllContacts = async (req, res, next) => {
   }
 };
 
-//!===========Contact-Fuction=============
+//!===========Services-Fuction=============
 
 const getAllServices = async (req, res, next) => {
   try {

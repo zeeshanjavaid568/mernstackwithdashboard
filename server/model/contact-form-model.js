@@ -1,9 +1,9 @@
 const { Schema, model } = require("mongoose");
 
 const contactSchema = new Schema({
-  username: { type: String, require: true },
-  email: { type: String, require: true },
-  message: { type: String, require: true },
+  username: { type: String, required: true },
+  email: { type: String, required: true },
+  message: { type: String, required: true },
 });
 
 const Contact = new model("Contact", contactSchema);

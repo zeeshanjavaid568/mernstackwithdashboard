@@ -38,8 +38,6 @@ const Admin_Update = () => {
           body: JSON.stringify(data),
         }
       );
-      // const updateUserData = await response.json();
-      // console.log("🚀 ~ file: Admin_Update.jsx:40 ~ handleSubmit ~ updateUserData:", updateUserData)
 
       if (response.ok) {
         toast.success("Updated successfully.");
@@ -62,7 +60,6 @@ const Admin_Update = () => {
         }
       );
       const data = await response.json();
-
       setData(data);
     } catch (error) {
       console.log(`Admin delete User Error: ${error}`);
@@ -93,7 +90,6 @@ const Admin_Update = () => {
                   autoComplete="off"
                   onChange={handleInputs}
                   value={data.username}
-                  required
                 />
               </div>
 
@@ -106,7 +102,6 @@ const Admin_Update = () => {
                   autoComplete="off"
                   onChange={handleInputs}
                   value={data.email}
-                  required
                 />
               </div>
 
@@ -119,7 +114,6 @@ const Admin_Update = () => {
                   autoComplete="off"
                   onChange={handleInputs}
                   value={data.phone}
-                  required
                 />
               </div>
 

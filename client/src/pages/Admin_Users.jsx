@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const Admin_Users = () => {
   const [users, setUsers] = useState();
-  // console.log("🚀 ~ file: Admin_Users.jsx:6 ~ users:", users);
   const { authorizationToken } = useAuth();
 
   //TODO: ALL USERS GET API USED
@@ -16,10 +15,6 @@ const Admin_Users = () => {
         headers: { Authorization: authorizationToken },
       });
       const data = await response.json();
-      // console.log(
-      //   "🚀 ~ file: Admin_Users.jsx:17 ~ getAllUsersData ~ data:",
-      //   data
-      // );
       setUsers(data);
     } catch (error) {
       console.log(`Admin Users Error: ${error}`);
@@ -36,13 +31,8 @@ const Admin_Users = () => {
           headers: { Authorization: authorizationToken },
         }
       );
-      const userDeleteData = await response.json();
-      console.log(
-        "🚀 ~ file: Admin_Users.jsx:37 ~ deleteUser ~ userDeleteData:",
-        userDeleteData
-      );
+      const userDeleteData = await response.json();     
       toast.success(userDeleteData.message);
-
       if (response.ok) {
         getAllUsersData();
       }

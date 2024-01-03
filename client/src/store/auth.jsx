@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("🚀 ~ file: auth.jsx:39 ~ userAuthentication ~ data:", data)
         setUser(data.userData);
       }
     } catch (error) {
@@ -55,7 +54,6 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        // console.log("🚀 ~ file: auth.jsx:56 ~ getServices ~ data:", data)
         setServices(data.message);
       }
     } catch (error) {

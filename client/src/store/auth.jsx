@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await fetch(`http://localhost:5000/api/auth/user`, {
         method: "GET",
-        headers: { Authorization:  authorizationToken},
+        headers: { Authorization: authorizationToken },
       });
 
       if (response.ok) {
@@ -46,10 +46,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   //TODO: Get Services page data
-  const getServices = async () =>{
+  const getServices = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/data/services', {
-        method: 'GET'
+      const response = await fetch("http://localhost:5000/api/data/services", {
+        method: "GET",
       });
 
       if (response.ok) {
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.log(`Frontend services page error: ${error}`);
     }
-  }
+  };
 
   useEffect(() => {
     getServices();
@@ -68,7 +68,14 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ storetokenInLS, LogoutUser, isLoggedIn, user, services, authorizationToken }}
+      value={{
+        storetokenInLS,
+        LogoutUser,
+        isLoggedIn,
+        user,
+        services,
+        authorizationToken,
+      }}
     >
       {children}
     </AuthContext.Provider>

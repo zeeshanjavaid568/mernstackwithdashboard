@@ -40,8 +40,8 @@ const updateUserDataById = async (req, res, next) => {
       { _id: id },
       { $set: updatedUserData }
     );
-    const message = 'User data update successfully.';
-    return res.status(200).json({ message, updatedData});
+    const message = "User data update successfully.";
+    return res.status(200).json({ message, updatedData });
   } catch (error) {
     next(error);
   }
@@ -73,6 +73,18 @@ const getAllContacts = async (req, res, next) => {
   }
 };
 
+//!===========delete-Contact-Fuction=============
+
+const deleteContact = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await Contact.deleteOne({ _id: id });
+    res.status(200).json({ message: "Contact deleted Successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 //!===========Services-Fuction=============
 
 const getAllServices = async (req, res, next) => {
@@ -91,8 +103,9 @@ const getAllServices = async (req, res, next) => {
 module.exports = {
   getAllUsers,
   deleteUser,
-  getUserById,
-  getAllContacts,
-  getAllServices,
   updateUserDataById,
+  getUserById,
+  getAllServices,
+  getAllContacts,
+  deleteContact,
 };

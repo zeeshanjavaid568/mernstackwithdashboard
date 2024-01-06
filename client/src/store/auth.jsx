@@ -13,6 +13,8 @@ export const AuthProvider = ({ children }) => {
   const [services, setServices] = useState("");
   //TODO: Token Store in variable
   const authorizationToken = `Bearer ${token}`;
+  //TODO: isLoading STATE CREATED
+  const [isLoading, setIsLoading] = useState(true);
 
   //TODO: localy store token function
   const storetokenInLS = (serverToken) => {
@@ -31,6 +33,7 @@ export const AuthProvider = ({ children }) => {
   //TODO: Jwt authentication - to get the currently loggedIn user data
   const userAuthentication = async () => {
     try {
+      setIsLoading(true);
       const response = await fetch(`http://localhost:5000/api/auth/user`, {
         method: "GET",
         headers: { Authorization: authorizationToken },
@@ -39,6 +42,7 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         setUser(data.userData);
+      setIsLoading(false);
       }
     } catch (error) {
       console.error("Error fetching user data");
@@ -75,6 +79,7 @@ export const AuthProvider = ({ children }) => {
         user,
         services,
         authorizationToken,
+        isLoading,
       }}
     >
       {children}

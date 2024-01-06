@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 
 const Admin_Users = () => {
   const [users, setUsers] = useState();
+  const [loading, setLoading] = useState(true);
   const { authorizationToken } = useAuth();
 
   //TODO: ALL USERS GET API USED
   const getAllUsersData = async () => {
     try {
+      setLoading(true);
       const response = await fetch("http://localhost:5000/api/admin/users", {
         method: "GET",
         headers: { Authorization: authorizationToken },
@@ -18,6 +20,8 @@ const Admin_Users = () => {
       setUsers(data);
     } catch (error) {
       console.log(`Admin Users Error: ${error}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -31,7 +35,7 @@ const Admin_Users = () => {
           headers: { Authorization: authorizationToken },
         }
       );
-      const userDeleteData = await response.json();     
+      const userDeleteData = await response.json();
       toast.success(userDeleteData.message);
       if (response.ok) {
         getAllUsersData();
@@ -52,38 +56,47 @@ const Admin_Users = () => {
           <h1> Admin Users Data </h1>
         </div>
         <div className="container admin-users">
-          <table>
-            <tr>
-              <th> Name </th>
-              <th> Email </th>
-              <th> Phone </th>
-              <th> Update </th>
-              <th> Delete </th>
-            </tr>
-            <tbody>
-              {users?.map((usersData, index) => {
-                return (
-                  <tr key={index}>
-                    <td> {usersData.username} </td>
-                    <td> {usersData.email} </td>
-                    <td> {usersData.phone} </td>
-                    <td>
-                      <button>
-                      <Link to={`/admin/users/${usersData._id}/edit`}>
-                        Edit
-                      </Link>
-                      </button>
-                    </td>
-                    <td>
-                      <button onClick={() => deleteUser(usersData._id)}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          {loading ? (
+            //TODO: Show loader while fetching Data
+            <div>
+              {" "}
+              <h1> Loading... </h1>
+            </div>
+          ) : (
+            <table>
+              <tr>
+                <th> Name </th>
+                <th> Email </th>
+                <th> Phone </th>
+                <th> Update </th>
+                <th> Delete </th>
+              </tr>
+              <tbody>
+                {users?.map((usersData, index) => {
+                  return (
+                    <tr key={index}>
+                      <td> {usersData.username} </td>
+                      <td> {usersData.email} </td>
+                      <td> {usersData.phone} </td>
+                      <td>
+                        <button>
+                          <Link to={`/admin/users/${usersData._id}/edit`}>
+                            Edit
+                          </Link>
+                        </button>
+                      </td>
+                      <td>
+                        <button onClick={() => deleteUser(usersData._id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+          ;
         </div>
       </section>
     </>

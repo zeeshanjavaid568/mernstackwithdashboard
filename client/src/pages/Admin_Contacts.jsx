@@ -4,12 +4,13 @@ import { toast } from "react-toastify";
 
 const Admin_Contacts = () => {
   const [contact, setContact] = useState();
-
+  const [loading, setLoading] = useState(true);
   const { authorizationToken } = useAuth();
 
   //TODO: ALL CONTACTS GET API USED
   const getAllContacts = async () => {
     try {
+      setLoading(true); //TODO: Set loading to true when starting to fetch
       const response = await fetch("http://localhost:5000/api/admin/contacts", {
         method: "GET",
         headers: { Authorization: authorizationToken },
@@ -18,6 +19,8 @@ const Admin_Contacts = () => {
       setContact(contactsData);
     } catch (error) {
       console.log(`Admin getAllContacts Error: ${error}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,38 +55,46 @@ const Admin_Contacts = () => {
           <h1> Admin Contact Data </h1>
         </div>
         <div className="container admin-users">
-          <table>
-            <tr>
-              <th> Name </th>
-              <th> Email </th>
-              <th> Message </th>
-              <th> Update </th>
-              <th> Delete </th>
-            </tr>
-            <tbody>
-              {contact?.map((contactData, index) => {
-                return (
-                  <tr key={index}>
-                    <td> {contactData.username} </td>
-                    <td> {contactData.email} </td>
-                    <td> {contactData.message} </td>
-                    <td>
-                      <button>
-                        {/* <Link to={`/admin/users/${usersData._id}/edit`}> */}
-                        Edit
-                        {/* </Link> */}
-                      </button>
-                    </td>
-                    <td>
-                      <button onClick={() => deleteContact(contactData._id)}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          {loading ? (
+            //TODO: Show loader while fetching Data
+            <div>
+              {" "}
+              <h1> Loading... </h1>
+            </div>
+          ) : (
+            <table>
+              <tr>
+                <th> Name </th>
+                <th> Email </th>
+                <th> Message </th>
+                <th> Update </th>
+                <th> Delete </th>
+              </tr>
+              <tbody>
+                {contact?.map((contactData, index) => {
+                  return (
+                    <tr key={index}>
+                      <td> {contactData.username} </td>
+                      <td> {contactData.email} </td>
+                      <td> {contactData.message} </td>
+                      <td>
+                        <button>
+                          {/* <Link to={`/admin/users/${usersData._id}/edit`}> */}
+                          Edit
+                          {/* </Link> */}
+                        </button>
+                      </td>
+                      <td>
+                        <button onClick={() => deleteContact(contactData._id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
         </div>
       </section>
     </>

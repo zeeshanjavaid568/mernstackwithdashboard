@@ -37,8 +37,23 @@ router
   .delete(authMiddleware, adminMiddleware, adminController.deleteContact);
 //TODO: USERS API CRUD END
 
+//TODO: SERVICES API CRUD START
 router
   .route("/services")
   .get(authMiddleware, adminMiddleware, adminController.getAllServices);
+router
+  .route("/Services/:id")
+  .get(authMiddleware, adminMiddleware, adminController.getServicesById);
+router
+  .route("/services/update/:id")
+  .patch(
+    authMiddleware,
+    adminMiddleware,
+    adminController.updateServicesDataById
+  );
+router
+  .route("/services/delete/:id")
+  .delete(authMiddleware, adminMiddleware, adminController.deleteServices);
+//TODO: SERVICES API CRUD END
 
 module.exports = router;

@@ -139,6 +139,49 @@ const getAllServices = async (req, res, next) => {
   }
 };
 
+//!===========GET-SINGLE-ServicesDATA-IN-UPDATE-Fuction=============
+
+const getServicesById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const data = await Service.findOne({ _id: id }, { password: 0 });
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//!===========UPDATE-SINGLE-ServicesDATA-IN-UPDATE-Fuction=============
+
+const updateServicesDataById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const updatedContactData = req.body;
+
+    const updatedData = await Service.updateOne(
+      { _id: id },
+      { $set: updatedContactData }
+    );
+    const message = "Contact data update successfully.";
+    return res.status(200).json({ message, updatedData });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+//!===========delete-Contact-Fuction=============
+
+const deleteServices = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await Service.deleteOne({ _id: id });
+    res.status(200).json({ message: "Contact deleted Successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 //TODO: SERVICES API CRUD END
 
 
@@ -152,4 +195,7 @@ module.exports = {
   getContactById,
   updateContactDataById,
   getAllServices,
+  getServicesById,
+  updateServicesDataById,
+  deleteServices
 };

@@ -2,6 +2,8 @@ const User = require("../model/user-model");
 const Contact = require("../model/contact-form-model");
 const Service = require("../model/service-model");
 
+//TODO: USERS API CRUD START
+
 //!===========Users-Fuction=============
 
 const getAllUsers = async (req, res, next) => {
@@ -58,6 +60,9 @@ const deleteUser = async (req, res, next) => {
     next(error);
   }
 };
+//TODO: USERS API CRUD END
+
+//TODO: CONTACTS API CRUD START
 
 //!===========Contacts-Fuction=============
 
@@ -73,6 +78,37 @@ const getAllContacts = async (req, res, next) => {
   }
 };
 
+//!===========GET-SINGLE-UserDATA-IN-UPDATE-Fuction=============
+
+const getContactById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const data = await Contact.findOne({ _id: id }, { password: 0 });
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//!===========UPDATE-SINGLE-UserDATA-IN-UPDATE-Fuction=============
+
+const updateContactDataById = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const updatedContactData = req.body;
+
+    const updatedData = await Contact.updateOne(
+      { _id: id },
+      { $set: updatedContactData }
+    );
+    const message = "Contact data update successfully.";
+    return res.status(200).json({ message, updatedData });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 //!===========delete-Contact-Fuction=============
 
 const deleteContact = async (req, res, next) => {
@@ -84,6 +120,9 @@ const deleteContact = async (req, res, next) => {
     next(error);
   }
 };
+//TODO: CONTACTS API CRUD END
+
+//TODO: SERVICES API CRUD START
 
 //!===========Services-Fuction=============
 
@@ -100,12 +139,17 @@ const getAllServices = async (req, res, next) => {
   }
 };
 
+//TODO: SERVICES API CRUD END
+
+
 module.exports = {
   getAllUsers,
   deleteUser,
   updateUserDataById,
   getUserById,
-  getAllServices,
   getAllContacts,
   deleteContact,
+  getContactById,
+  updateContactDataById,
+  getAllServices,
 };

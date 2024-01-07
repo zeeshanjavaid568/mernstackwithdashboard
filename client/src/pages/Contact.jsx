@@ -45,7 +45,10 @@ const Contact = () => {
       if (response.ok) {
         setContact(defaultContactForm);
         const data = response.json();
-        console.log("🚀 ~ file: Contact.jsx:48 ~ handleSubmit ~ contactData:", data)
+        console.log(
+          "🚀 ~ file: Contact.jsx:48 ~ handleSubmit ~ contactData:",
+          data
+        );
       }
     } catch (error) {
       console.log("contact form error", error);

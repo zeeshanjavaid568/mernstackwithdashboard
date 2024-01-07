@@ -23,6 +23,16 @@ router
   .route("/contacts")
   .get(authMiddleware, adminMiddleware, adminController.getAllContacts);
 router
+  .route("/contacts/:id")
+  .get(authMiddleware, adminMiddleware, adminController.getContactById);
+router
+  .route("/contacts/update/:id")
+  .patch(
+    authMiddleware,
+    adminMiddleware,
+    adminController.updateContactDataById
+  );
+router
   .route("/contacts/delete/:id")
   .delete(authMiddleware, adminMiddleware, adminController.deleteContact);
 //TODO: USERS API CRUD END

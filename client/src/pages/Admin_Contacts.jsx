@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Admin_Contacts = () => {
   const [contact, setContact] = useState();
@@ -79,9 +80,9 @@ const Admin_Contacts = () => {
                       <td> {contactData.message} </td>
                       <td>
                         <button>
-                          {/* <Link to={`/admin/users/${usersData._id}/edit`}> */}
-                          Edit
-                          {/* </Link> */}
+                          <Link to={`/admin/contacts/${contactData._id}/edit`}>
+                            Edit
+                          </Link>
                         </button>
                       </td>
                       <td>

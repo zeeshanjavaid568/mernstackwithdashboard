@@ -15,16 +15,59 @@
 
 html {
     font-size: 62.5%;
+    height: 100%;
 }
 
 /*? base style */
 
 body {
     margin: 0;
-    /* display: flex;
-    place-items: center; */
-    /* min-width: 32rem; */
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.admin_layout {
+    display: flex;
+}
+
+.admin_layout header {
+    width: 300px;
+}
+
+.admin_layout ul {
+    display: block;
+    padding: 9px;
+}
+
+.admin_layout ul li {
+    padding: 11px 0;
+}
+
+.admin_layout ul li svg {
+    margin: 0 7px 0 0;
+}
+
+.admin-users {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.admin-users h1 {
+    margin: 0 0 50px 0;
+}
+
+.admin-users table tr th {
+    display: flex;
+    justify-content: start;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.section-form label {
+    color: var(--bg-color);
 }
 
 /*?  Help me reach 1 Million subs 👉 https://youtube.com/thapatechnical */
@@ -33,6 +76,16 @@ h1 {
     font-size: 5.4rem;
     line-height: 1.1;
     font-weight: bold;
+    color: var(--bg-color);
+}
+
+
+h2 {
+    color: var(--bg-color);
+}
+
+p {
+    color: var(--bg-color);
 }
 
 p,
@@ -131,7 +184,7 @@ a.active {
     position: relative;
     text-transform: capitalize;
 
-    &::after {
+    /* &::after {
         content: "";
         position: absolute;
         left: 0;
@@ -139,20 +192,20 @@ a.active {
         width: 50%;
         height: 0.5rem;
         background-color: var(--btn-color);
-    }
+    } */
 }
 
 /* TODO: Default toastify styling */
 
 .toastBody {
-  font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
-  font-size: 1.7rem;
+    font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
+    font-size: 1.7rem;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         color: #213547;
-        background-color: #ffffff;
+        background-color: #000000;
     }
 
     a:hover,
@@ -161,7 +214,7 @@ a.active {
     }
 
     button {
-        background-color: #f9f9f9;
+        background-color: var(--btn-color);
     }
 }
 
@@ -366,7 +419,7 @@ a.active {
 ** -------------------------  */
 
 .section-registration {
-    padding: 0 3.2rem;
+    padding: 3.8rem;
 
     & .container {
         /* background-color: #fff; */
@@ -380,6 +433,38 @@ a.active {
     }
 
     & .registration-form {
+        & label {
+            display: block;
+            margin: 2.4rem 0 0.8rem 0;
+            text-transform: capitalize;
+        }
+
+        & input {
+            width: 80%;
+            padding: 0.6rem 0.6rem;
+        }
+
+        & button {
+            margin-top: 3.2rem;
+        }
+    }
+}
+
+.section-login {
+    padding: 6.8rem;
+
+    & .container {
+        /* background-color: #fff; */
+        padding-top: 3.2rem;
+        align-items: center;
+
+        & img {
+            width: 80%;
+            height: auto;
+        }
+    }
+
+    & .login-form {
         & label {
             display: block;
             margin: 2.4rem 0 0.8rem 0;
@@ -465,14 +550,15 @@ a.active {
     }
 }
 
-body tr{
+body tr {
     display: grid;
     grid-template-columns: repeat(5, minmax(10rem, 1fr));
     align-items: 0 0.3rem 0 grey;
     margin-bottom: 10px;
     border-bottom: 4px solid transparent;
     color: var(--bg-color);
-    &:last-child{
+
+    &:last-child {
         box-shadow: none;
     }
 }

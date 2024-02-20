@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 const Admin_Services = () => {
   const [users, setUsers] = useState();
   const [loading, setLoading] = useState(true);
-  const { authorizationToken } = useAuth();
+  const { authorizationToken, API } = useAuth();
 
   //TODO: ALL Services GET API USED
   const getAllServicesData = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/admin/services", {
+      const response = await fetch(`${API}/api/admin/services`, {
         method: "GET",
         headers: { Authorization: authorizationToken },
       });
@@ -29,7 +29,7 @@ const Admin_Services = () => {
   const deleteService = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/services/delete/${id}`,
+        `${API}/api/admin/services/delete/${id}`,
         {
           method: "DELETE",
           headers: { Authorization: authorizationToken },
@@ -52,10 +52,11 @@ const Admin_Services = () => {
   return (
     <>
       <section>
-        <div className="container">
-          <h1> Admin Services Data </h1>
-        </div>
+
         <div className="container admin-users">
+          <div className="container">
+            <h1> Admin Services Data </h1>
+          </div>
           {loading ? (
             //TODO: Show loader while fetching Data
             <div>
@@ -83,7 +84,7 @@ const Admin_Services = () => {
                       <td>
                         <button>
                           {/* <Link to={`/admin/services/${servicesData._id}/edit`}> */}
-                            Edit
+                          Edit
                           {/* </Link> */}
                         </button>
                       </td>

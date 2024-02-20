@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../store/auth";
+import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
 
 const defaultContactForm = {
   username: "",
@@ -11,7 +13,7 @@ const Contact = () => {
   const [contact, setContact] = useState(defaultContactForm);
   const [userData, setUserData] = useState(true);
 
-  const { user } = useAuth();
+  const { user, API } = useAuth();
 
   if (userData && user) {
     setContact({
@@ -36,7 +38,7 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/form/contact", {
+      const response = await fetch(`${API}/api/form/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contact),
@@ -57,6 +59,7 @@ const Contact = () => {
 
   return (
     <>
+      <Navbar />
       <section className="section-contact">
         <div className="contact-content container">
           <h1 className="main-heading">contact us</h1>
@@ -131,6 +134,7 @@ const Contact = () => {
           ></iframe>
         </section>
       </section>
+      <Footer />
     </>
   );
 };

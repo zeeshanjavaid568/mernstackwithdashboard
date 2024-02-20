@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
+import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -12,7 +14,7 @@ const Register = () => {
   });
 
   const navigate = useNavigate();
-  const { storetokenInLS } = useAuth();
+  const { storetokenInLS, API } = useAuth();
 
   const handleInput = (e) => {
     let name = e.target.name;
@@ -22,12 +24,12 @@ const Register = () => {
       [name]: value,
     });
   };
-    console.log(user);
+  console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/api/auth/register`, {
+      const response = await fetch(`${API}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
@@ -54,6 +56,7 @@ const Register = () => {
 
   return (
     <>
+      <Navbar />
       <main>
         <div className="section-registration">
           <div className="container grid grid-two-cols">
@@ -128,6 +131,7 @@ const Register = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };

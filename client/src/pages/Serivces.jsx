@@ -1,10 +1,13 @@
 import { useAuth } from "../store/auth";
+import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
 
 const Serivces = () => {
   const { services } = useAuth();
 
   return (
     <>
+      <Navbar />
       <section className="section-serices">
         <div className="container">
           <h1 className="main-heading"> Services </h1>
@@ -16,7 +19,7 @@ const Serivces = () => {
             return (
               <div className="card" key={index}>
                 <div className="card-img">
-                  <img src="/image/home-page.jpg" width={400} alt="" />
+                  <img src="/image/home-page.png" width={400} alt="" />
                 </div>
                 <div className="card-details">
                   <div className="grid grid-two-cols">
@@ -32,6 +35,7 @@ const Serivces = () => {
           })}
         </div>
       </section>
+      <Footer />
     </>
   );
 };

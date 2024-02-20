@@ -8,10 +8,11 @@ const Admin_Update = () => {
     username: "",
     email: "",
     phone: "",
+    isAdmin: ""
   });
 
   const params = useParams();
-  const { authorizationToken } = useAuth();
+  const { authorizationToken, API } = useAuth();
 
   const handleInputs = (e) => {
     let name = e.target.name;
@@ -28,7 +29,7 @@ const Admin_Update = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/users/update/${params.id}`,
+        `${API}/api/admin/users/update/${params.id}`,
         {
           method: "PATCH",
           headers: {
@@ -53,7 +54,7 @@ const Admin_Update = () => {
   const getSingleUserData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/users/${params.id}`,
+        `${API}/api/admin/users/${params.id}`,
         {
           method: "GET",
           headers: { Authorization: authorizationToken },
@@ -114,6 +115,18 @@ const Admin_Update = () => {
                   autoComplete="off"
                   onChange={handleInputs}
                   value={data.phone}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone"> Admin </label>
+                <input
+                  type="text"
+                  name="isAdmin"
+                  id="isAdmin"
+                  autoComplete="off"
+                  onChange={handleInputs}
+                  value={data.isAdmin}
                 />
               </div>
 

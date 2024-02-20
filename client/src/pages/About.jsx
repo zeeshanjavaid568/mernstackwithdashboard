@@ -1,11 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../store/auth";
+import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
 
 const About = () => {
   const { user } = useAuth();
 
   return (
     <>
+      <Navbar />
       <main>
         <section className="section-hero">
           <div className="container grid grid-two-cols">
@@ -48,7 +51,7 @@ const About = () => {
             </div>
             <div className="hero-image">
               <img
-                src="/image/about-page.jpg"
+                src="/image/about-page.png"
                 alt="coding buddies "
                 width="400"
                 height="500"
@@ -57,6 +60,7 @@ const About = () => {
           </div>
         </section>
       </main>{" "}
+      <Footer />
     </>
   );
 };

@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 const Admin_Contacts = () => {
   const [contact, setContact] = useState();
   const [loading, setLoading] = useState(true);
-  const { authorizationToken } = useAuth();
+  const { authorizationToken, API } = useAuth();
 
   //TODO: ALL CONTACTS GET API USED
   const getAllContacts = async () => {
     try {
       setLoading(true); //TODO: Set loading to true when starting to fetch
-      const response = await fetch("http://localhost:5000/api/admin/contacts", {
+      const response = await fetch(`${API}/api/admin/contacts`, {
         method: "GET",
         headers: { Authorization: authorizationToken },
       });
@@ -29,7 +29,7 @@ const Admin_Contacts = () => {
   const deleteContact = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/contacts/delete/${id}`,
+        `${API}/api/admin/contacts/delete/${id}`,
         {
           method: "DELETE",
           headers: { Authorization: authorizationToken },
@@ -52,10 +52,11 @@ const Admin_Contacts = () => {
   return (
     <>
       <section>
-        <div className="container">
-          <h1> Admin Contact Data </h1>
-        </div>
+
         <div className="container admin-users">
+          <div className="container">
+            <h1> Admin Contact Data </h1>
+          </div>
           {loading ? (
             //TODO: Show loader while fetching Data
             <div>

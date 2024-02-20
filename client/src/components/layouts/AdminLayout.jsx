@@ -17,36 +17,38 @@ const AdminLayout = () => {
 
   return (
     <>
-      <header>
-        <div className="container">
-          <nav>
-            <ul>
-              <li>
-                <NavLink to={"/admin/users"}>
-                  {" "}
-                  <FaUser />
-                  User{" "}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/admin/contacts"}>
-                  {" "}
-                  <MdContactPhone />
-                  Contacts{" "}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/admin/services"}>
-                  {" "}
-                  <FaServicestack />
-                  Services{" "}
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-      <Outlet />
+      <div className="admin_layout">
+        <header>
+          <div className="container">
+            <nav>
+              <ul>
+                <li>
+                  <NavLink to={"/admin/users"}>
+                    {" "}
+                    <FaUser />
+                    User{" "}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={"/admin/contacts"}>
+                    {" "}
+                    <MdContactPhone />
+                    Contacts{" "}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={"/admin/services"}>
+                    {" "}
+                    <FaServicestack />
+                    Services{" "}
+                  </NavLink>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+        <Outlet />
+      </div>
     </>
   );
 };

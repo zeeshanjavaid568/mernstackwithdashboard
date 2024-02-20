@@ -1,6 +1,10 @@
+import Footer from '../components/common/Footer';
+import Navbar from '../components/common/Navbar';
+
 const Home = () => {
   return (
     <>
+    <Navbar />
       <main>
         <section className="section-hero">
           <div className="container grid grid-two-cols">
@@ -42,7 +46,7 @@ const Home = () => {
           {/* hero images  */}
           <div className="hero-image">
             <img
-              src="/image/home-page-2.jpg"
+              src="/image/home-page.png"
               alt="coding together"
               width="500"
               height="600"
@@ -69,6 +73,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
+import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -10,7 +12,7 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
-  const { storetokenInLS } = useAuth();
+  const { storetokenInLS, API } = useAuth();
 
   //TODO: let handle the input field values
   const handleInput = (e) => {
@@ -27,7 +29,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:5000/api/auth/login`, {
+      const response = await fetch(`${API}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
@@ -55,9 +57,10 @@ const Login = () => {
 
   return (
     <>
+      <Navbar />
       <section>
         <main>
-          <div className="section-registration">
+          <div className="section-login">
             <div className="container grid grid-two-cols">
               <div className="registration-image reg-img">
                 <img
@@ -68,7 +71,7 @@ const Login = () => {
                 />
               </div>
               {/*//TODO: our main registration code  */}
-              <div className="registration-form">
+              <div className="login-form">
                 <h1 className="main-heading mb-3">Login form</h1>
                 <br />
                 <form onSubmit={handleSubmit}>
@@ -105,6 +108,7 @@ const Login = () => {
           </div>
         </main>
       </section>
+      <Footer />
     </>
   );
 };

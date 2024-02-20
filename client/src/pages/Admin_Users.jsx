@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 const Admin_Users = () => {
   const [users, setUsers] = useState();
   const [loading, setLoading] = useState(true);
-  const { authorizationToken } = useAuth();
+  const { authorizationToken, API } = useAuth();
 
   //TODO: ALL USERS GET API USED
   const getAllUsersData = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/admin/users", {
+      const response = await fetch(`${API}/api/admin/users`, {
         method: "GET",
         headers: { Authorization: authorizationToken },
       });
@@ -29,7 +29,7 @@ const Admin_Users = () => {
   const deleteUser = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/users/delete/${id}`,
+        `${API}/api/admin/users/delete/${id}`,
         {
           method: "DELETE",
           headers: { Authorization: authorizationToken },
@@ -51,54 +51,50 @@ const Admin_Users = () => {
 
   return (
     <>
-      <section>
+      <div className="admin-users">
         <div className="container">
-          <h1> Admin Users Data </h1>
+          <h1>Admin Users Data</h1>
         </div>
-        <div className="container admin-users">
-          {loading ? (
-            //TODO: Show loader while fetching Data
-            <div>
-              {" "}
-              <h1> Loading... </h1>
-            </div>
-          ) : (
-            <table>
+        {loading ? (
+          //TODO: Show loader while fetching Data
+          <div>
+            <h1>Loading...</h1>
+          </div>
+        ) : (
+          <table>
+            <thead>
               <tr>
-                <th> Name </th>
-                <th> Email </th>
-                <th> Phone </th>
-                <th> Update </th>
-                <th> Delete </th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Update</th>
+                <th>Delete</th>
+                <th>Admin</th>
               </tr>
-              <tbody>
-                {users?.map((usersData, index) => {
-                  return (
-                    <tr key={index}>
-                      <td> {usersData.username} </td>
-                      <td> {usersData.email} </td>
-                      <td> {usersData.phone} </td>
-                      <td>
-                        <button>
-                          <Link to={`/admin/users/${usersData._id}/edit`}>
-                            Edit
-                          </Link>
-                        </button>
-                      </td>
-                      <td>
-                        <button onClick={() => deleteUser(usersData._id)}>
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
-          ;
-        </div>
-      </section>
+            </thead>
+            <tbody>
+              {users?.map((userData, index) => (
+                <tr key={index}>
+                  <td>{userData.username}</td>
+                  <td>{userData.email}</td>
+                  <td>{userData.phone}</td>
+                  <td>
+                    <button>
+                      <Link to={`/admin/users/${userData._id}/edit`}>Edit</Link>
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={() => deleteUser(userData._id)}>Delete</button>
+                  </td>
+                  <td style={{ color: userData.isAdmin ? 'green' : 'red' }}>
+                    {userData.isAdmin ? 'Yes' : 'No'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </>
   );
 };

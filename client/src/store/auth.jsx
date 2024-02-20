@@ -10,11 +10,13 @@ export const AuthProvider = ({ children }) => {
   //TODO: Set user data in useState hook
   const [user, setUser] = useState("");
   //TODO: Set services page data in useState hook
-  const [services, setServices] = useState("");
+  const [services, setServices] = useState([]);
   //TODO: Token Store in variable
   const authorizationToken = `Bearer ${token}`;
   //TODO: isLoading STATE CREATED
   const [isLoading, setIsLoading] = useState(true);
+
+  const API = import.meta.env.VITE_APP_API_URL;
 
   //TODO: localy store token function
   const storetokenInLS = (serverToken) => {
@@ -34,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   const userAuthentication = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`http://localhost:5000/api/auth/user`, {
+      const response = await fetch(`${API}/api/auth/user`, {
         method: "GET",
         headers: { Authorization: authorizationToken },
       });
@@ -42,7 +44,7 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         setUser(data.userData);
-      setIsLoading(false);
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("Error fetching user data");
@@ -52,7 +54,7 @@ export const AuthProvider = ({ children }) => {
   //TODO: Get Services page data
   const getServices = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/data/services", {
+      const response = await fetch(`${API}/api/data/services`, {
         method: "GET",
       });
 
@@ -80,6 +82,7 @@ export const AuthProvider = ({ children }) => {
         services,
         authorizationToken,
         isLoading,
+        API
       }}
     >
       {children}

@@ -6,9 +6,7 @@ import Contact from "./pages/Contact";
 import Register from "./pages/Register";
 import Login from "./pages/login";
 import Serivces from "./pages/Serivces";
-import Navbar from "./components/common/Navbar";
 import Error from "./pages/Error";
-import Footer from "./components/common/Footer";
 import Logout from "./pages/Logout";
 import AdminLayout from "./components/layouts/AdminLayout";
 import Admin_Users from "./pages/Admin_Users";
@@ -20,7 +18,6 @@ import Admin_Users_Update from "./pages/Admin_Users_Update";
 function App() {
   return (
     <>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -39,7 +36,6 @@ function App() {
           <Route path="services" element={<Admin_Services />} />
         </Route>
       </Routes>
-      <Footer />
     </>
   );
 }

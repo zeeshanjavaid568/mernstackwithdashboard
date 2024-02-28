@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const Admin_Users = () => {
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
   const { authorizationToken, API } = useAuth();
 
-  //TODO: ALL USERS GET API USED
+  // Function to fetch all users data
   const getAllUsersData = async () => {
     try {
       setLoading(true);
@@ -25,16 +26,13 @@ const Admin_Users = () => {
     }
   };
 
-  //TODO: DELETE USER API USED
+  // Function to delete a user
   const deleteUser = async (id) => {
     try {
-      const response = await fetch(
-        `${API}/api/admin/users/delete/${id}`,
-        {
-          method: "DELETE",
-          headers: { Authorization: authorizationToken },
-        }
-      );
+      const response = await fetch(`${API}/api/admin/users/delete/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: authorizationToken },
+      });
       const userDeleteData = await response.json();
       toast.success(userDeleteData.message);
       if (response.ok) {
@@ -49,14 +47,36 @@ const Admin_Users = () => {
     getAllUsersData();
   }, []);
 
+  // Function to handle search input change
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Filter users based on search term
+  const filteredUsers = users.filter((user) => {
+    return (
+      user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.phone.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+
   return (
     <>
       <div className="admin-users">
         <div className="container">
           <h1>Admin Users Data</h1>
         </div>
+        <div style={{ display: 'flex', justifyContent: 'end', width: '86%', margin: '20px 0' }}>
+          <input
+            type="text"
+            placeholder="Search users..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+        </div>
         {loading ? (
-          //TODO: Show loader while fetching Data
+          // Show loader while fetching Data
           <div>
             <h1>Loading...</h1>
           </div>
@@ -73,7 +93,7 @@ const Admin_Users = () => {
               </tr>
             </thead>
             <tbody>
-              {users?.map((userData, index) => (
+              {filteredUsers.map((userData, index) => (
                 <tr key={index}>
                   <td>{userData.username}</td>
                   <td>{userData.email}</td>
